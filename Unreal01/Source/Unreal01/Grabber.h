@@ -31,6 +31,9 @@ public:
 		void Release();
 
 private:
+	bool GetGrabbableInReach(FHitResult& OutHitResult) const;
+
+private:
 	UPROPERTY(EditAnywhere)
 		float MaxGrabDistance = 400.f;
 
