@@ -55,7 +55,12 @@ void UGrabber::Grab()
 	if (isHit)
 	{
 		auto* HitComponent = HitResult.GetComponent();
+		HitComponent->SetSimulatePhysics(true);
 		HitComponent->WakeAllRigidBodies();
+
+		auto* HitActor = HitResult.GetActor();
+		HitActor->Tags.Add("Grabbed");
+		HitActor->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			HitResult.GetComponent()
@@ -69,17 +74,17 @@ void UGrabber::Grab()
 void UGrabber::Release()
 {
 	UPhysicsHandleComponent* PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
-	UE_LOG(LogTemp, Display, TEXT("name : %s"), *GetOwner()->GetName());
-
 	if (nullptr == PhysicsHandle)
 		return;
 
 	auto* GrabComponent = PhysicsHandle->GetGrabbedComponent();
 	if (GrabComponent)
 	{
+		auto* GrabbedActor = PhysicsHandle->GetGrabbedComponent()->GetOwner();
+		GrabbedActor->Tags.Remove("Grabbed");
+
 		GrabComponent->WakeAllRigidBodies();
 		PhysicsHandle->ReleaseComponent();
-
 	}
 }
 

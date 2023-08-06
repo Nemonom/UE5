@@ -50,10 +50,11 @@ AActor* UTriggerComponent::GetAcceptableActor() const
 
 	for (auto& Actor : Actors)
 	{
-		if (triggerTagName != TEXT("")
-			&& Actor->ActorHasTag(triggerTagName))
+		bool HasTriggerTag = Actor->ActorHasTag(triggerTagName);
+		bool IsGrabbed = Actor->ActorHasTag("Grabbed");
+
+		if (HasTriggerTag && false == IsGrabbed)
 		{
-			UE_LOG(LogTemp, Display, TEXT("asdf"));
 			return Actor;
 		}
 	}
