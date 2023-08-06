@@ -546,6 +546,5 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/c++,c,unrealengine,visualstudio
 
 # SY
-/Unreal01/Content
 /Unreal01/Saved
 /Unreal01/Intermediate
