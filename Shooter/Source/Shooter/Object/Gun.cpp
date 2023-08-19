@@ -42,7 +42,16 @@ void AGun::PullTrigger()
 		, ECollisionChannel::ECC_GameTraceChannel1);
 
 	if (bSuccess)
-		DrawDebugPoint(GetWorld(), HitResult.Location, 10, FColor::Red, true);
+	{
+		FVector ShotDirection = -Rotation.Vector();
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, HitResult.Location, ShotDirection.Rotation());
+		auto* HitActor = HitResult.GetActor();
+		if (HitActor)
+		{
+			FPointDamageEvent DamageEvent(Damage, HitResult, ShotDirection, nullptr);
+			HitActor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+		}
+	}
 }
 
 // Called when the game starts or when spawned
