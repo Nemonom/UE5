@@ -3,6 +3,8 @@
 
 #include "ShooterCharacter.h"
 #include "Gun.h"
+#include "Components/CapsuleComponent.h"
+#include "../ShooterGameModeBase.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -54,6 +56,17 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	Hp -= DamageApply;
 
 	UE_LOG(LogTemp, Warning, TEXT("Health left %f"), Hp);
+
+	if (IsDead())
+	{
+		auto* GameModeBase = GetWorld()->GetAuthGameMode<AShooterGameModeBase>();
+		if (GameModeBase)
+			GameModeBase->PawnKilled(this);
+
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		
+	}
 
 	return DamageApply;
 }
