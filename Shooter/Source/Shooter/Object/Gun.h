@@ -14,32 +14,32 @@ class SHOOTER_API AGun : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AGun();
-	void PullTrigger();
+	void			PullTrigger();
 
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	virtual void	BeginPlay() override;
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void	Tick(float DeltaTime) override;
 
 private:
 	UPROPERTY(VisibleAnywhere)
-		USceneComponent* Root;
+		USceneComponent*		Root;
 
 	UPROPERTY(VisibleAnywhere)
 		USkeletalMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
-		UParticleSystem* MuzzleFlash;
+		UParticleSystem*		MuzzleFlash;
 
 	UPROPERTY(EditAnywhere)
-		UParticleSystem* ImpactEffect;
+		UParticleSystem*		ImpactEffect;
 
 	UPROPERTY(EditAnywhere)
-		float MaxRange = 1000.f;
+		float					MaxRange = 1000.f;
 
 	UPROPERTY(EditAnywhere)
-		float Damage = 10.f;
+		float					Damage = 10.f;
 };

@@ -15,5 +15,8 @@ class SHOOTER_API AKillAllGameMode : public AShooterGameModeBase
 	GENERATED_BODY()
 
 public:
-	virtual void PawnKilled(APawn* Pawn) override;
+	virtual void	PawnKilled(APawn* Pawn) override;
+
+private:
+	void			EndGame(bool IsPlayerWinner);
 };

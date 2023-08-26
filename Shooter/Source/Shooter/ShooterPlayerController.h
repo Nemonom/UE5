@@ -15,15 +15,17 @@ class SHOOTER_API AShooterPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
+	virtual void	GameHasEnded(class AActor* EndGameFocus = nullptr, bool IsWinner = false) override;
 
 private:
 	UPROPERTY(EditAnywhere)
-		TSubclassOf<class UUserWidget> LoseUIClass;
-
+		TSubclassOf<class UUserWidget>	LoseUIClass;
 
 	UPROPERTY(EditAnywhere)
-		float RestartTime = 5.f;
+		TSubclassOf<class UUserWidget>	WinUIClass;
 
-	FTimerHandle RestartTimer;
+	UPROPERTY(EditAnywhere)
+		float							RestartTime = 5.f;
+
+	FTimerHandle						RestartTimer;
 };
