@@ -20,6 +20,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void	BeginPlay() override;
 
+private:
+	bool			Trace(FHitResult& HitResult, FVector& ShotDirection);
+	AController*	GetOwnerController() const;
+
 public:	
 	// Called every frame
 	virtual void	Tick(float DeltaTime) override;
@@ -36,6 +40,12 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		UParticleSystem*		ImpactEffect;
+
+	UPROPERTY(EditAnywhere)
+		USoundBase*				MuzzleSound;
+
+	UPROPERTY(EditAnywhere)
+		USoundBase*				ImpactSound;
 
 	UPROPERTY(EditAnywhere)
 		float					MaxRange = 1000.f;
